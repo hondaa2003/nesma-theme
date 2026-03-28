@@ -1,12 +1,20 @@
 {
-  "name": "theme-raed",
-  "version": "1.0.3",
-  "description": "Salla Theme",
+  "name": "nesma-theme",
+  "version": "1.0.0",
+  "description": "Nesma Custom Salla Theme - A unique experience for our customers.",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SallaApp/theme-raed.git"
+    "url": "git+https://github.com/hondaa2003/nesma-theme.git"
   },
+  "author": "Youssef (Hondaa)",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "salla-cli": "latest"
+  }
+}
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "test": "echo \"Error: no test specified\" && exit 1",
