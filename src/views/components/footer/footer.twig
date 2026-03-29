@@ -1,58 +1,95 @@
-<footer class="store-footer bg-[#1A1614] text-[#F5F0E8] pt-16 pb-8">
-  <div class="container grid grid-cols-1 lg:grid-cols-4 gap-10">
+Footer · HTML
+Copy
 
-    <!-- Brand -->
-    <div>
-      <h2 class="text-2xl font-bold mb-4 tracking-wide text-[#B8955A]">
-        {{ store.name }}
-      </h2>
-
-      {% if store.description %}
-        <p class="text-sm leading-6 opacity-80 mb-6">
-          {{ store.description|raw }}
-        </p>
-      {% endif %}
-
-      <salla-social class="flex gap-4"></salla-social>
-    </div>
-
-    <!-- Links -->
-    <div>
-      <h3 class="mb-4 text-lg font-semibold text-[#B8955A]">
-        روابط مهمة
-      </h3>
-      <salla-menu source="footer"></salla-menu>
-    </div>
-
-    <!-- Contacts -->
-    <div>
-      <h3 class="mb-4 text-lg font-semibold text-[#B8955A]">
-        تواصل معنا
-      </h3>
-      <salla-contacts></salla-contacts>
-    </div>
-
-    <!-- Apps + Trust -->
-    <div>
-      <h3 class="mb-4 text-lg font-semibold text-[#B8955A]">
-        حمل التطبيق
-      </h3>
-
-      <salla-apps-icons class="mb-6"></salla-apps-icons>
-
-      <salla-trust-badges dark></salla-trust-badges>
-    </div>
-
+{{- ** ──────────────────────────────────────────
+     NASMA FOOTER — نسمة للعبايات الفاخرة
+     ضع هذا الكود في ملف footer.twig
+────────────────────────────────────────── ** -}}
+ 
+<footer class="store-footer nasma-footer">
+ 
+  {# ── الخط الزخرفي العلوي ── #}
+  <div class="nasma-footer__divider" aria-hidden="true">
+    <span></span><span class="nasma-footer__divider-icon">✦</span><span></span>
   </div>
-
-  <!-- Bottom Bar -->
-  <div class="container mt-10 pt-6 border-t border-[#B8955A]/20 flex flex-col md:flex-row items-center justify-between gap-4">
-
-    <span class="text-sm opacity-70">
-      {% hook copyright %}
-    </span>
-
-    <salla-payments></salla-payments>
-
+ 
+  <div class="nasma-footer__inner">
+    <div class="nasma-footer__grid">
+ 
+      {# ── عمود العلامة التجارية ── #}
+      <div class="nasma-footer__brand">
+        <a href="{{ link('/') }}" class="nasma-footer__logo">
+          {{ store.name }}
+          <span class="nasma-footer__logo-sub">عبايات فاخرة</span>
+        </a>
+ 
+        {% if store.description %}
+          <div class="nasma-footer__desc">{{ store.description|raw }}</div>
+        {% endif %}
+ 
+        <salla-social class="nasma-footer__social"></salla-social>
+ 
+        <div class="nasma-footer__badges">
+          <salla-trust-badges {% if theme.settings.get('footer_is_dark') %} dark {% endif %}></salla-trust-badges>
+ 
+          {% if store.settings.tax.number %}
+            <div class="nasma-footer__tax">
+              {% if store.settings.tax.certificate %}
+                <a class="load-img-onclick nasma-footer__tax-img" data-modal-id="modal-value-tax" href="#/">
+                  <img width="40" height="50" src="{{'images/tax.png' | cdn(70,70)}}" loading="lazy" alt="value added tax">
+                </a>
+              {% endif %}
+              <div>
+                <p class="nasma-footer__tax-label">{{ trans('common.elements.tax_number') }}</p>
+                <b class="nasma-footer__tax-num">{{ store.settings.tax.number }}</b>
+              </div>
+            </div>
+ 
+            {% if store.settings.tax.certificate %}
+              <salla-modal sub-title-first sub-title="{{ trans('common.elements.tax_number') }}"
+                modal-title="{{ store.settings.tax.number }}" id="modal-value-tax">
+                <div class="flex justify-center max-w-full">
+                  <img class="w-full" loading="lazy"
+                    data-src="{{ store.settings.tax.certificate }}"
+                    alt="{{ store.settings.tax.number }}"/>
+                </div>
+              </salla-modal>
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+ 
+      {# ── عمود روابط الصفحات ── #}
+      <div class="nasma-footer__col">
+        <h4 class="nasma-footer__col-title">{{ trans('blocks.footer.pages_links') }}</h4>
+        <salla-menu source="footer" class="nasma-footer__menu"></salla-menu>
+      </div>
+ 
+      {# ── عمود التواصل ── #}
+      <div class="nasma-footer__col">
+        <h4 class="nasma-footer__col-title">تواصلي معنا</h4>
+        <salla-contacts class="nasma-footer__contacts"></salla-contacts>
+        <div class="nasma-footer__social-mobile">
+          <salla-social></salla-social>
+        </div>
+      </div>
+ 
+      {# ── عمود التطبيقات ── #}
+      <div class="nasma-footer__col nasma-footer__col--apps">
+        <h4 class="nasma-footer__col-title">حمّلي التطبيق</h4>
+        <salla-apps-icons class="nasma-footer__apps"></salla-apps-icons>
+      </div>
+ 
+    </div>
   </div>
+ 
+  {# ── الشريط السفلي ── #}
+  <div class="nasma-footer__bottom">
+    <div class="nasma-footer__bottom-inner">
+      <span class="nasma-footer__copyright">{% hook copyright %}</span>
+      <salla-payments class="nasma-footer__payments"></salla-payments>
+    </div>
+  </div>
+ 
 </footer>
+ 
